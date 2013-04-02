@@ -31,7 +31,6 @@
 		10E83094170A1D8200CCB6F0 /* LoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83093170A1D8200CCB6F0 /* LoggedInViewController.m */; };
 		10E83097170B792F00CCB6F0 /* CustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */; };
 		10E8309A170B7B4400CCB6F0 /* RegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */; };
-		10E8309D170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +67,6 @@
 		10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLoginViewController.m; sourceTree = "<group>"; };
 		10E83098170B7B4400CCB6F0 /* RegisterAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterAccountViewController.h; sourceTree = "<group>"; };
 		10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountViewController.m; sourceTree = "<group>"; };
-		10E8309B170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotUsernamePasswordViewController.h; sourceTree = "<group>"; };
-		10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotUsernamePasswordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +130,6 @@
 				10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */,
 				10E83098170B7B4400CCB6F0 /* RegisterAccountViewController.h */,
 				10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */,
-				10E8309B170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.h */,
-				10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -249,7 +244,6 @@
 				10E83094170A1D8200CCB6F0 /* LoggedInViewController.m in Sources */,
 				10E83097170B792F00CCB6F0 /* CustomLoginViewController.m in Sources */,
 				10E8309A170B7B4400CCB6F0 /* RegisterAccountViewController.m in Sources */,
-				10E8309D170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

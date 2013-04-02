@@ -19,6 +19,19 @@
 		10E830731706319D00CCB6F0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10E830711706319D00CCB6F0 /* MainStoryboard.storyboard */; };
 		10E830761706319D00CCB6F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E830751706319D00CCB6F0 /* ViewController.m */; };
 		10E8307D1706349E00CCB6F0 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E8307C1706349E00CCB6F0 /* WindowsAzureMobileServices.framework */; };
+		10E83080170A0A7500CCB6F0 /* AuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8307F170A0A7500CCB6F0 /* AuthService.m */; };
+		10E8308A170A136F00CCB6F0 /* facebook-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83082170A136F00CCB6F0 /* facebook-login-button.png */; };
+		10E8308B170A136F00CCB6F0 /* facebook-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83083170A136F00CCB6F0 /* facebook-login-button@2x.png */; };
+		10E8308C170A136F00CCB6F0 /* google-signin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83084170A136F00CCB6F0 /* google-signin-button.png */; };
+		10E8308D170A136F00CCB6F0 /* google-signin-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83085170A136F00CCB6F0 /* google-signin-button@2x.png */; };
+		10E8308E170A136F00CCB6F0 /* microsoft-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83086170A136F00CCB6F0 /* microsoft-login-button.png */; };
+		10E8308F170A136F00CCB6F0 /* microsoft-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83087170A136F00CCB6F0 /* microsoft-login-button@2x.png */; };
+		10E83090170A136F00CCB6F0 /* twitter_blue_sign_in.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83088170A136F00CCB6F0 /* twitter_blue_sign_in.png */; };
+		10E83091170A136F00CCB6F0 /* twitter_blue_sign_in@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E83089170A136F00CCB6F0 /* twitter_blue_sign_in@2x.png */; };
+		10E83094170A1D8200CCB6F0 /* LoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83093170A1D8200CCB6F0 /* LoggedInViewController.m */; };
+		10E83097170B792F00CCB6F0 /* CustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */; };
+		10E8309A170B7B4400CCB6F0 /* RegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */; };
+		10E8309D170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +52,24 @@
 		10E830741706319D00CCB6F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		10E830751706319D00CCB6F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		10E8307C1706349E00CCB6F0 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		10E8307E170A0A7500CCB6F0 /* AuthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthService.h; sourceTree = "<group>"; };
+		10E8307F170A0A7500CCB6F0 /* AuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthService.m; sourceTree = "<group>"; };
+		10E83082170A136F00CCB6F0 /* facebook-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-login-button.png"; path = "Resources/facebook-login-button.png"; sourceTree = "<group>"; };
+		10E83083170A136F00CCB6F0 /* facebook-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-login-button@2x.png"; path = "Resources/facebook-login-button@2x.png"; sourceTree = "<group>"; };
+		10E83084170A136F00CCB6F0 /* google-signin-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "google-signin-button.png"; path = "Resources/google-signin-button.png"; sourceTree = "<group>"; };
+		10E83085170A136F00CCB6F0 /* google-signin-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "google-signin-button@2x.png"; path = "Resources/google-signin-button@2x.png"; sourceTree = "<group>"; };
+		10E83086170A136F00CCB6F0 /* microsoft-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "microsoft-login-button.png"; path = "Resources/microsoft-login-button.png"; sourceTree = "<group>"; };
+		10E83087170A136F00CCB6F0 /* microsoft-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "microsoft-login-button@2x.png"; path = "Resources/microsoft-login-button@2x.png"; sourceTree = "<group>"; };
+		10E83088170A136F00CCB6F0 /* twitter_blue_sign_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_blue_sign_in.png; path = Resources/twitter_blue_sign_in.png; sourceTree = "<group>"; };
+		10E83089170A136F00CCB6F0 /* twitter_blue_sign_in@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter_blue_sign_in@2x.png"; path = "Resources/twitter_blue_sign_in@2x.png"; sourceTree = "<group>"; };
+		10E83092170A1D8200CCB6F0 /* LoggedInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggedInViewController.h; sourceTree = "<group>"; };
+		10E83093170A1D8200CCB6F0 /* LoggedInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggedInViewController.m; sourceTree = "<group>"; };
+		10E83095170B792F00CCB6F0 /* CustomLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLoginViewController.h; sourceTree = "<group>"; };
+		10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLoginViewController.m; sourceTree = "<group>"; };
+		10E83098170B7B4400CCB6F0 /* RegisterAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterAccountViewController.h; sourceTree = "<group>"; };
+		10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountViewController.m; sourceTree = "<group>"; };
+		10E8309B170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotUsernamePasswordViewController.h; sourceTree = "<group>"; };
+		10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotUsernamePasswordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,12 +118,23 @@
 		10E8305F1706319D00CCB6F0 /* AuthenticationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				10E83081170A130E00CCB6F0 /* Resources */,
 				10E830681706319D00CCB6F0 /* AppDelegate.h */,
 				10E830691706319D00CCB6F0 /* AppDelegate.m */,
 				10E830711706319D00CCB6F0 /* MainStoryboard.storyboard */,
 				10E830741706319D00CCB6F0 /* ViewController.h */,
 				10E830751706319D00CCB6F0 /* ViewController.m */,
 				10E830601706319D00CCB6F0 /* Supporting Files */,
+				10E8307E170A0A7500CCB6F0 /* AuthService.h */,
+				10E8307F170A0A7500CCB6F0 /* AuthService.m */,
+				10E83092170A1D8200CCB6F0 /* LoggedInViewController.h */,
+				10E83093170A1D8200CCB6F0 /* LoggedInViewController.m */,
+				10E83095170B792F00CCB6F0 /* CustomLoginViewController.h */,
+				10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */,
+				10E83098170B7B4400CCB6F0 /* RegisterAccountViewController.h */,
+				10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */,
+				10E8309B170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.h */,
+				10E8309C170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -109,6 +151,21 @@
 				10E8306F1706319D00CCB6F0 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		10E83081170A130E00CCB6F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				10E83082170A136F00CCB6F0 /* facebook-login-button.png */,
+				10E83083170A136F00CCB6F0 /* facebook-login-button@2x.png */,
+				10E83084170A136F00CCB6F0 /* google-signin-button.png */,
+				10E83085170A136F00CCB6F0 /* google-signin-button@2x.png */,
+				10E83086170A136F00CCB6F0 /* microsoft-login-button.png */,
+				10E83087170A136F00CCB6F0 /* microsoft-login-button@2x.png */,
+				10E83088170A136F00CCB6F0 /* twitter_blue_sign_in.png */,
+				10E83089170A136F00CCB6F0 /* twitter_blue_sign_in@2x.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +224,14 @@
 				10E8306E1706319D00CCB6F0 /* Default@2x.png in Resources */,
 				10E830701706319D00CCB6F0 /* Default-568h@2x.png in Resources */,
 				10E830731706319D00CCB6F0 /* MainStoryboard.storyboard in Resources */,
+				10E8308A170A136F00CCB6F0 /* facebook-login-button.png in Resources */,
+				10E8308B170A136F00CCB6F0 /* facebook-login-button@2x.png in Resources */,
+				10E8308C170A136F00CCB6F0 /* google-signin-button.png in Resources */,
+				10E8308D170A136F00CCB6F0 /* google-signin-button@2x.png in Resources */,
+				10E8308E170A136F00CCB6F0 /* microsoft-login-button.png in Resources */,
+				10E8308F170A136F00CCB6F0 /* microsoft-login-button@2x.png in Resources */,
+				10E83090170A136F00CCB6F0 /* twitter_blue_sign_in.png in Resources */,
+				10E83091170A136F00CCB6F0 /* twitter_blue_sign_in@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +245,11 @@
 				10E830661706319D00CCB6F0 /* main.m in Sources */,
 				10E8306A1706319D00CCB6F0 /* AppDelegate.m in Sources */,
 				10E830761706319D00CCB6F0 /* ViewController.m in Sources */,
+				10E83080170A0A7500CCB6F0 /* AuthService.m in Sources */,
+				10E83094170A1D8200CCB6F0 /* LoggedInViewController.m in Sources */,
+				10E83097170B792F00CCB6F0 /* CustomLoginViewController.m in Sources */,
+				10E8309A170B7B4400CCB6F0 /* RegisterAccountViewController.m in Sources */,
+				10E8309D170B7B4F00CCB6F0 /* ForgotUsernamePasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +380,7 @@
 				10E8307B1706319D00CCB6F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+- (IBAction)tappedFacebook:(id)sender;
+- (IBAction)tappedGoogle:(id)sender;
+- (IBAction)tappedMicrosoft:(id)sender;
+- (IBAction)tappedTwitter:(id)sender;
+
 
 @end

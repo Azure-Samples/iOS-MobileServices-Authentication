@@ -11,6 +11,7 @@
 @interface LoggedInViewController : ViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblUserId;
 @property (weak, nonatomic) IBOutlet UILabel *lblInfo;
+- (IBAction)tappedLogout:(id)sender;
 
 
 @end

@@ -78,4 +78,9 @@
 - (IBAction)tappedTwitter:(id)sender {
     [self loginWithProvider:@"twitter"];    
 }
+
+- (void)logout {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end

@@ -1,22 +1,18 @@
 //
-//  LoggedInViewController.m
+//  DeepViewController.m
 //  AuthenticationDemo
 //
-//  Created by Chris Risner on 4/1/13.
+//  Created by Chris Risner on 4/3/13.
 //  Copyright (c) 2013 Microsoft DPE. All rights reserved.
 //
 
-#import "LoggedInViewController.h"
-#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
-#import "AuthService.h"
+#import "DeepViewController.h"
 
-@interface LoggedInViewController ()
-
-@property (strong, nonatomic) AuthService *authService;
+@interface DeepViewController ()
 
 @end
 
-@implementation LoggedInViewController
+@implementation DeepViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,14 +27,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.authService = [AuthService getInstance];
-    
-    self.lblUserId.text = self.authService.client.currentUser.userId;
-    
-    [self.authService getAuthDataOnSuccess:^(NSString *string) {
-        self.lblInfo.text = string;
-    }];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +36,12 @@
 }
 
 - (IBAction)tappedLogout:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+        
+}
+
+- (void) popTest {
     //[self.navigationController popToRootViewControllerAnimated:YES];
     UINavigationController *nav = (UINavigationController*) self.view.window.rootViewController;
     UIViewController *root = [nav.viewControllers objectAtIndex:0];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10DFED86170C935C00B1C67A /* DeepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DFED85170C935C00B1C67A /* DeepViewController.m */; };
+		10DFED89170C93E400B1C67A /* DeepModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DFED88170C93E400B1C67A /* DeepModalViewController.m */; };
 		10E8305A1706319D00CCB6F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E830591706319D00CCB6F0 /* UIKit.framework */; };
 		10E8305C1706319D00CCB6F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E8305B1706319D00CCB6F0 /* Foundation.framework */; };
 		10E8305E1706319D00CCB6F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E8305D1706319D00CCB6F0 /* CoreGraphics.framework */; };
@@ -34,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10DFED84170C935C00B1C67A /* DeepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepViewController.h; sourceTree = "<group>"; };
+		10DFED85170C935C00B1C67A /* DeepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeepViewController.m; sourceTree = "<group>"; };
+		10DFED87170C93E400B1C67A /* DeepModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepModalViewController.h; sourceTree = "<group>"; };
+		10DFED88170C93E400B1C67A /* DeepModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeepModalViewController.m; sourceTree = "<group>"; };
 		10E830561706319D00CCB6F0 /* AuthenticationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthenticationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E830591706319D00CCB6F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10E8305B1706319D00CCB6F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,10 @@
 				10E83096170B792F00CCB6F0 /* CustomLoginViewController.m */,
 				10E83098170B7B4400CCB6F0 /* RegisterAccountViewController.h */,
 				10E83099170B7B4400CCB6F0 /* RegisterAccountViewController.m */,
+				10DFED84170C935C00B1C67A /* DeepViewController.h */,
+				10DFED85170C935C00B1C67A /* DeepViewController.m */,
+				10DFED87170C93E400B1C67A /* DeepModalViewController.h */,
+				10DFED88170C93E400B1C67A /* DeepModalViewController.m */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -244,6 +254,8 @@
 				10E83094170A1D8200CCB6F0 /* LoggedInViewController.m in Sources */,
 				10E83097170B792F00CCB6F0 /* CustomLoginViewController.m in Sources */,
 				10E8309A170B7B4400CCB6F0 /* RegisterAccountViewController.m in Sources */,
+				10DFED86170C935C00B1C67A /* DeepViewController.m in Sources */,
+				10DFED89170C93E400B1C67A /* DeepModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

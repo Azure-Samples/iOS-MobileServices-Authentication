@@ -67,4 +67,13 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+    return NO;
+}
+
+- (UIViewController *)viewControllerForUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+    return self.parentViewController;
+}
+
 @end

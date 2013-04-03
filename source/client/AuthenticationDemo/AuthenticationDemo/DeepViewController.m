@@ -36,15 +36,15 @@
 }
 
 - (IBAction)tappedLogout:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    [self popTest];
         
 }
 
 - (void) popTest {
-    //[self.navigationController popToRootViewControllerAnimated:YES];
     UINavigationController *nav = (UINavigationController*) self.view.window.rootViewController;
     UIViewController *root = [nav.viewControllers objectAtIndex:0];
-    [root performSelector:@selector(logout) withObject:nil afterDelay:0.1];
+    [root performSelector:@selector(logout)];
+//    [root performSelector:@selector(logout) withObject:nil afterDelay:0.1];
 }
 @end

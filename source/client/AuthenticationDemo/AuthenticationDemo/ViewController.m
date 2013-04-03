@@ -83,4 +83,8 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+-(IBAction)reset:(UIStoryboardSegue *)segue {
+    
+}
 @end

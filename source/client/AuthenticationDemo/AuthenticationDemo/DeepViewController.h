@@ -9,6 +9,5 @@
 #import "ViewController.h"
 
 @interface DeepViewController : ViewController
-- (IBAction)tappedLogout:(id)sender;
 
 @end

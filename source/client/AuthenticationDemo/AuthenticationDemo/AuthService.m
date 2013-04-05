@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong)   MSTable *table;
 @property (nonatomic, strong)   MSTable *accountsTable;
+@property (nonatomic)           BOOL shouldRetryAuth;
 
 @end
 
@@ -39,6 +40,7 @@ static AuthService *singletonInstance;
         self.client = [MSClient clientWithApplicationURLString:@"https://myauthdemo.azure-mobile.net/"
                                                     withApplicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
 
+        self.client = [self.client clientwithFilter:self];
         // Create an MSTable instance to allow us to work with the TodoItem table
         self.table = [_client getTable:@"AuthData"];
         self.accountsTable = [_client getTable:@"Accounts"];
@@ -92,6 +94,21 @@ static AuthService *singletonInstance;
         }
     }];
 }
+- (void) testForced401:(BOOL)shouldRetry withCompletion:(CompletionWithStringBlock) completion {
+    
+    MSTable *badAuthTable = [_client getTable:@"BadAuth"];
+    NSDictionary *item = @{ @"data" : @"data"};
+
+    self.shouldRetryAuth = shouldRetry;
+    
+    [badAuthTable insert:item completion:^(NSDictionary *item, NSError *error) {
+
+        [self logErrorIfNotNil:error];
+        
+        completion(@"Retried auth success");
+    }];
+    
+}
 
 - (void) logErrorIfNotNil:(NSError *) error
 {
@@ -100,5 +117,86 @@ static AuthService *singletonInstance;
     }
 }
 
+
+
+- (void) handleRequest:(NSURLRequest *)request
+                onNext:(MSFilterNextBlock)onNext
+            onResponse:(MSFilterResponseBlock)onResponse
+{
+    // Increment the busy counter before sending the request
+    //[self busy:YES];
+    onNext(request, ^(NSHTTPURLResponse *response, NSData *data, NSError *error){
+        [self filterResponse:response
+                     forData:data
+                   withError:error
+                  forRequest:request
+                      onNext:onNext
+                  onResponse:onResponse];
+    });
+}
+
+- (void) filterResponse: (NSHTTPURLResponse *) response
+                forData: (NSData *) data
+              withError: (NSError *) error
+             forRequest:(NSURLRequest *) request
+                 onNext:(MSFilterNextBlock) onNext
+             onResponse: (MSFilterResponseBlock) onResponse
+{
+    if (response.statusCode == 401) {
+        
+        //we're forcing custom auth to relogin from the root for now
+        if (self.shouldRetryAuth && ![self.authProvider isEqualToString:@"Custom"]) {
+            // do login
+            [self.client loginWithProvider:self.authProvider onController:[[[[UIApplication sharedApplication] delegate] window] rootViewController] animated:YES completion:^(MSUser *user, NSError *error) {
+                if (error && error.code == -9001) {
+                    // user cancelled authentication - return the original response
+                    //[self busy:NO];
+                    //onResponse(response, data, error);
+                    //Log them out here too
+                    [self triggerLogout];
+                    return;
+                }
+                //TODO: Store their login information to Keychain / prefs again
+                NSMutableURLRequest *newRequest = [request mutableCopy];
+                [newRequest setValue:self.client.currentUser.mobileServiceAuthenticationToken forHTTPHeaderField:@"X-ZUMO-AUTH"];
+                newRequest = [self addQueryStringParamToRequest:newRequest];
+                //[newRequest setURL:[newRequest URL]]
+                onNext(newRequest, ^(NSHTTPURLResponse *innerResponse, NSData *innerData, NSError *innerError){
+                    [self filterResponse:innerResponse
+                                 forData:innerData
+                               withError:innerError
+                              forRequest:request
+                                  onNext:onNext
+                              onResponse:onResponse];
+                });
+            }];
+        } else {
+            //This fetches the current view controller and executes the
+            //logout segue 
+            [self triggerLogout];
+            //What's interesting here is that even if we're currently in a modal (Deep Modal) this will fetch the top most VC from the NAV (in this demo that would be the loggedInVC) and execute it's logoutSegue.  This still works even though the modal is showing
+        }
+    }
+    else {
+        //[self busy:NO];
+        onResponse(response, data, error);
+    }
+}
+
+-(void)triggerLogout {
+    UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    UINavigationController *navVC = (UINavigationController *)rootVC;
+    UIViewController *topVC = navVC.topViewController;
+    [topVC performSegueWithIdentifier:@"logoutSegue" sender:self];
+}
+
+-(NSMutableURLRequest *)addQueryStringParamToRequest:(NSMutableURLRequest *)request {
+    
+    NSMutableString *absoluteURLString = [[[request URL] absoluteString] mutableCopy];
+    NSString *newQuery = @"?bypass=true";
+    [absoluteURLString appendString:newQuery];
+    [request setURL:[NSURL URLWithString:absoluteURLString]];    
+    return request;
+}
 
 @end

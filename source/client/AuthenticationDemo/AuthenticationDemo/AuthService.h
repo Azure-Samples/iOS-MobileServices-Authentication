@@ -16,10 +16,11 @@ typedef void (^CompletionBlock) ();
 typedef void (^CompletionWithStringBlock) (NSString *string);
 typedef void (^CompletionWithIndexBlock) (NSUInteger index);
 
-@interface AuthService : NSObject
+@interface AuthService : NSObject <MSFilter>
 
 +(AuthService*) getInstance;
 
+@property (nonatomic, strong)   NSString *authProvider;
 @property (nonatomic, strong)   MSClient *client;
 
 - (void) getAuthDataOnSuccess:(CompletionWithStringBlock) completion;
@@ -29,5 +30,11 @@ typedef void (^CompletionWithIndexBlock) (NSUInteger index);
 
 - (void) loginAccount:(NSDictionary *) item
               completion:(CompletionWithStringBlock) completion;
+
+- (void) testForced401:(BOOL)shouldRetry withCompletion:(CompletionWithStringBlock) completion;
+
+- (void) handleRequest:(NSURLRequest *)request
+                onNext:(MSFilterNextBlock)onNext
+            onResponse:(MSFilterResponseBlock)onResponse;
 
 @end

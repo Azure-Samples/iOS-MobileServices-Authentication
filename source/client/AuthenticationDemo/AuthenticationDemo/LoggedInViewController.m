@@ -52,10 +52,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)tappedLogout:(id)sender {
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-    UINavigationController *nav = (UINavigationController*) self.view.window.rootViewController;
-    UIViewController *root = [nav.viewControllers objectAtIndex:0];
-    [root performSelector:@selector(logout) withObject:nil afterDelay:0.1];
+- (IBAction)tapped401NoRetry:(id)sender {
+    [self.authService testForced401:NO withCompletion:^(NSString *string) {
+        self.lblInfo.text = @"This should never happen";
+    }];
+}
+
+- (IBAction)tapped401Retry:(id)sender {
+    [self.authService testForced401:YES withCompletion:^(NSString *string) {
+        self.lblInfo.text = string;
+    }];
 }
 @end

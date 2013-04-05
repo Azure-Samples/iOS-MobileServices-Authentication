@@ -9,6 +9,6 @@
 #import "ViewController.h"
 
 @interface DeepModalViewController : ViewController
-- (IBAction)tappedLogout:(id)sender;
+- (IBAction)tapped401:(id)sender;
 
 @end

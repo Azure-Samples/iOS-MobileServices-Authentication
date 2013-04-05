@@ -7,6 +7,7 @@
 //
 
 #import "DeepModalViewController.h"
+#import "AuthService.h"
 
 @interface DeepModalViewController ()
 
@@ -35,33 +36,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)tappedLogout:(id)sender {
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-    //[[[self presentingViewController] presentingViewController] dismissModalViewControllerAnimated:YES];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        [self.presentedViewController.navigationController popToRootViewControllerAnimated:YES];
-//        [self.parentViewController.navigationController popToRootViewControllerAnimated:YES];
-//    }];
-//    UIViewController *root =self.view.window.rootViewController;
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//        [root.navigationController performSelector:@selector(popToRootViewControllerAnimated) withObject:NO afterDelay:0.1];
-////        [root.navigationController popToRootViewControllerAnimated:NO];
-//    }];
-    
 
-    
-//    [self.view.window.rootViewController dismissViewControllerAnimated:NO completion:^{
-//        [self.presentingViewController.navigationController popToRootViewControllerAnimated:YES];
-//        
-//    }];
-    UINavigationController *nav = (UINavigationController*) self.view.window.rootViewController;
-    UIViewController *root = [nav.viewControllers objectAtIndex:0];
-    [root performSelector:@selector(logout) withObject:nil afterDelay:0.1];
-//    [self.view.window.rootViewController performSelector:@selector(logoutTest) withObject:nil afterDelay:0.1];
-
+- (IBAction)tapped401:(id)sender {
+    AuthService *authService = [AuthService getInstance];
+    [authService testForced401:NO withCompletion:^(NSString *string) {
+        NSLog(@"This should never happen");
+    }];
 }
-
-
-
 @end

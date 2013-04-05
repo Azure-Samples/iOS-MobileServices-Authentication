@@ -33,9 +33,9 @@
 
 -(void) loginWithProvider:(NSString *)provider
 {
+    //Save the provider in case we need to reauthorize them
+    self.authService.authProvider = provider;
     UINavigationController *controller =
-    
-    
     [self.authService.client
      loginViewControllerWithProvider:provider
      completion:^(MSUser *user, NSError *error) {
@@ -50,6 +50,7 @@
 //             [self.todoService refreshDataOnSuccess:^{
 //                 [self.tableView reloadData];
 //             }];
+             //Todo: store login info to keychain / prfs
              [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
          }
          
@@ -79,12 +80,10 @@
     [self loginWithProvider:@"twitter"];    
 }
 
-- (void)logout {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
--(IBAction)reset:(UIStoryboardSegue *)segue {
-    
+-(IBAction)logout:(UIStoryboardSegue *)segue {
+    [self.authService.client logout];
+    for (NSHTTPCookie *value in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:value];
+    }
 }
 @end

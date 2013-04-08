@@ -23,6 +23,22 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.authService = [AuthService getInstance];
+    
+//    if (self.authService.client.currentUser.userId) {
+//        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
+//    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    NSLog(@"VC:Viewdidappear");
+    if (self.authService.client.currentUser.userId) {
+//        [self performSelector:@selector(moveOn) withObject:self afterDelay:0.1];
+        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
+    }
+}
+
+-(void)moveOn {
+        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,6 +67,7 @@
 //                 [self.tableView reloadData];
 //             }];
              //Todo: store login info to keychain / prfs
+             [self.authService saveAuthInfo];
              [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
          }
          
@@ -81,6 +98,7 @@
 }
 
 -(IBAction)logout:(UIStoryboardSegue *)segue {
+    [self.authService killAuthInfo];
     [self.authService.client logout];
     for (NSHTTPCookie *value in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:value];

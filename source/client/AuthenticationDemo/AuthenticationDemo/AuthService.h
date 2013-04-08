@@ -37,4 +37,10 @@ typedef void (^CompletionWithIndexBlock) (NSUInteger index);
                 onNext:(MSFilterNextBlock)onNext
             onResponse:(MSFilterResponseBlock)onResponse;
 
+- (void)saveAuthInfo;
+
+- (void)loadAuthInfo;
+
+- (void)killAuthInfo;
+
 @end

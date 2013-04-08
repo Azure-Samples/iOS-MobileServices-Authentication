@@ -48,7 +48,7 @@
     
     [self.authService loginAccount:item completion:^(NSString *string) {
         if ([string isEqualToString:@"SUCCESS"]) {
-            //TODO: store login info to keychain / shared prefs
+
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             [self performSegueWithIdentifier:@"customAuthSegue" sender:self];            
         } else {

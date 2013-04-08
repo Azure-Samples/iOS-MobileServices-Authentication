@@ -8,6 +8,7 @@
 
 #import "AuthService.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import "KeychainItemWrapper.h"
 
 #pragma mark * Private interace
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong)   MSTable *table;
 @property (nonatomic, strong)   MSTable *accountsTable;
 @property (nonatomic)           BOOL shouldRetryAuth;
+@property (nonatomic, strong)   NSString *keychainName;
 
 @end
 
@@ -41,10 +43,14 @@ static AuthService *singletonInstance;
                                                     withApplicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
 
         self.client = [self.client clientwithFilter:self];
+
+        self.keychainName = @"keychain";
+        [self loadAuthInfo];
+        
         // Create an MSTable instance to allow us to work with the TodoItem table
         self.table = [_client getTable:@"AuthData"];
         self.accountsTable = [_client getTable:@"Accounts"];
-        
+
     }
     
     return self;
@@ -87,9 +93,12 @@ static AuthService *singletonInstance;
             completion([error localizedDescription]);
             return;
         } else {
+            //TODO: store login info to keychain / shared prefs
+            
             MSUser *user = [[MSUser alloc] initWithUserId:[item valueForKey:@"userId"]];
             user.mobileServiceAuthenticationToken = [item valueForKey:@"token"];
             self.client.currentUser = user;
+            [self saveAuthInfo];
             completion(@"SUCCESS");
         }
     }];
@@ -157,6 +166,7 @@ static AuthService *singletonInstance;
                     return;
                 }
                 //TODO: Store their login information to Keychain / prefs again
+                [self saveAuthInfo];
                 NSMutableURLRequest *newRequest = [request mutableCopy];
                 [newRequest setValue:self.client.currentUser.mobileServiceAuthenticationToken forHTTPHeaderField:@"X-ZUMO-AUTH"];
                 newRequest = [self addQueryStringParamToRequest:newRequest];
@@ -184,6 +194,7 @@ static AuthService *singletonInstance;
 }
 
 -(void)triggerLogout {
+    [self killAuthInfo];
     UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     UINavigationController *navVC = (UINavigationController *)rootVC;
     UIViewController *topVC = navVC.topViewController;
@@ -197,6 +208,28 @@ static AuthService *singletonInstance;
     [absoluteURLString appendString:newQuery];
     [request setURL:[NSURL URLWithString:absoluteURLString]];    
     return request;
+}
+
+- (void)saveAuthInfo {
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
+
+    [keychain setObject:self.client.currentUser.userId forKey:(__bridge id)kSecAttrService];
+//        [keychain setObject:self.client.currentUser.userId forKey:(__bridge id)@"userid"];
+    [keychain setObject:self.client.currentUser.mobileServiceAuthenticationToken forKey:(__bridge id)kSecAttrAccount];
+}
+
+- (void)loadAuthInfo {
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
+    
+    if ([keychain objectForKey:(__bridge id)kSecAttrService]) {
+        self.client.currentUser = [[MSUser alloc] initWithUserId:[keychain objectForKey:(__bridge id)kSecAttrService]];
+        self.client.currentUser.mobileServiceAuthenticationToken = [keychain objectForKey:(__bridge id)kSecAttrAccount];
+    }
+}
+
+- (void)killAuthInfo {
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
+    [keychain resetKeychainItem];
 }
 
 @end

@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface DeepViewController : ViewController
+@interface DeepViewController : UIViewController
 
 @end

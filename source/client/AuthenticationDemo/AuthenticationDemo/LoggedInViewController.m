@@ -40,10 +40,10 @@
     }];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    //Overriding this method becuase otherwise the viewDidAppear is being
-    //called on the ViewController class for some reason
-}
+//-(void)viewDidAppear:(BOOL)animated {
+//    //Overriding this method becuase otherwise the viewDidAppear is being
+//    //called on the ViewController class for some reason
+//}
 
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {

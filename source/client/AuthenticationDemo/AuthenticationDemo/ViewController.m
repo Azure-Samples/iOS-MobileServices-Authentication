@@ -24,21 +24,29 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.authService = [AuthService getInstance];
     
-//    if (self.authService.client.currentUser.userId) {
-//        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
-//    }
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    NSLog(@"VC:Viewdidappear");
     if (self.authService.client.currentUser.userId) {
-//        [self performSelector:@selector(moveOn) withObject:self afterDelay:0.1];
-        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
+        //@try {
+        [self performSegueWithIdentifier:@"loggedInSegue" sender:nil];
+//        } @catch (NSException *exception) {
+//            NSLog(@"Segue not found: %@", exception);
+//        }
     }
 }
 
--(void)moveOn {
-        [self performSegueWithIdentifier:@"loggedInSegue" sender:self];    
+-(void)viewDidAppear:(BOOL)animated {
+    //The user already has a valid token, pass them into the logged in view
+    //if (self.authService.client.currentUser.userId) {
+    //    [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
+    //}
+    NSLog(@"VC:viewDIDAppear");
+    
+//    if (self.authService.client.currentUser.userId) {
+//        @try {
+//            [self performSegueWithIdentifier:@"loggedInSegue" sender:self];
+//        } @catch (NSException *exception) {
+//            NSLog(@"Segue not found: %@", exception);
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning

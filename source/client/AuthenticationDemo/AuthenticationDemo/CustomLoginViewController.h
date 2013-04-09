@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface CustomLoginViewController : ViewController <UITextFieldDelegate>
+@interface CustomLoginViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 - (IBAction)tappedCancel:(id)sender;

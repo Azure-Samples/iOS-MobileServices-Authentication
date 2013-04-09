@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface RegisterAccountViewController : ViewController <UITextFieldDelegate>
+@interface RegisterAccountViewController : UIViewController <UITextFieldDelegate>
 - (IBAction)tappedRegister:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;

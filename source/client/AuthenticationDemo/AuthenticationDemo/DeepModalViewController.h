@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface DeepModalViewController : ViewController
+@interface DeepModalViewController : UIViewController
 - (IBAction)tapped401:(id)sender;
 
 @end

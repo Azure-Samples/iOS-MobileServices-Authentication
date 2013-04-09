@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface LoggedInViewController : ViewController
+@interface LoggedInViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblUserId;
 @property (weak, nonatomic) IBOutlet UILabel *lblInfo;
 - (IBAction)tapped401NoRetry:(id)sender;

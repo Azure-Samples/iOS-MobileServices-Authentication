@@ -35,4 +35,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+//-(void)viewDidAppear:(BOOL)animated {
+//    //Overriding this method becuase otherwise the viewDidAppear is being
+//    //called on the ViewController class for some reason
+//}
+
 @end

@@ -59,7 +59,7 @@
 {
     //Save the provider in case we need to reauthorize them
     self.authService.authProvider = provider;
-    UINavigationController *controller =
+    MSLoginController *controller =
     [self.authService.client
      loginViewControllerWithProvider:provider
      completion:^(MSUser *user, NSError *error) {
@@ -108,8 +108,5 @@
 -(IBAction)logout:(UIStoryboardSegue *)segue {
     [self.authService killAuthInfo];
     [self.authService.client logout];
-    for (NSHTTPCookie *value in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:value];
-    }
 }
 @end

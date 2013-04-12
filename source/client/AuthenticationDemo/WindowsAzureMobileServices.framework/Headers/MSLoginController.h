@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ----------------------------------------------------------------------------
 //
@@ -76,8 +76,8 @@ typedef void (^MSClientLoginBlock)(MSUser *user, NSError *error);
 
 // Initializes an |MSLoginController| instance with the given client, login
 // provider and completion block.
--(id) initWithClient:(MSClient *)client
-            provider:(NSString *)provider
-          completion:(MSClientLoginBlock)completion;
+-(id)initWithClient:(MSClient *)client
+           provider:(NSString *)provider
+         completion:(MSClientLoginBlock)completion;
 
 @end

@@ -40,16 +40,16 @@ static AuthService *singletonInstance;
     if (self) {
         // Initialize the Mobile Service client with your URL and key
         self.client = [MSClient clientWithApplicationURLString:@"https://myauthdemo.azure-mobile.net/"
-                                                    withApplicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
+                                                    applicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
 
-        self.client = [self.client clientwithFilter:self];
+        self.client = [self.client clientWithFilter:self];
 
         self.keychainName = @"keychain";
         [self loadAuthInfo];
         
         // Create an MSTable instance to allow us to work with the TodoItem table
-        self.table = [_client getTable:@"AuthData"];
-        self.accountsTable = [_client getTable:@"Accounts"];
+        self.table = [_client tableWithName:@"AuthData"];
+        self.accountsTable = [_client tableWithName:@"Accounts"];
 
     }
     
@@ -105,7 +105,7 @@ static AuthService *singletonInstance;
 }
 - (void) testForced401:(BOOL)shouldRetry withCompletion:(CompletionWithStringBlock) completion {
     
-    MSTable *badAuthTable = [_client getTable:@"BadAuth"];
+    MSTable *badAuthTable = [_client tableWithName:@"BadAuth"];
     NSDictionary *item = @{ @"data" : @"data"};
 
     self.shouldRetryAuth = shouldRetry;
@@ -129,8 +129,8 @@ static AuthService *singletonInstance;
 
 
 - (void) handleRequest:(NSURLRequest *)request
-                onNext:(MSFilterNextBlock)onNext
-            onResponse:(MSFilterResponseBlock)onResponse
+                next:(MSFilterNextBlock)onNext
+            response:(MSFilterResponseBlock)onResponse
 {
     // Increment the busy counter before sending the request
     //[self busy:YES];
@@ -152,11 +152,13 @@ static AuthService *singletonInstance;
              onResponse: (MSFilterResponseBlock) onResponse
 {
     if (response.statusCode == 401) {
-        
+        [self killAuthInfo];
         //we're forcing custom auth to relogin from the root for now
         if (self.shouldRetryAuth && ![self.authProvider isEqualToString:@"Custom"]) {
             // do login
-            [self.client loginWithProvider:self.authProvider onController:[[[[UIApplication sharedApplication] delegate] window] rootViewController] animated:YES completion:^(MSUser *user, NSError *error) {
+      
+            
+            [self.client loginWithProvider:self.authProvider controller:[[[[UIApplication sharedApplication] delegate] window] rootViewController] animated:YES completion:^(MSUser *user, NSError *error) {
                 if (error && error.code == -9001) {
                     // user cancelled authentication - return the original response
                     //[self busy:NO];
@@ -230,6 +232,10 @@ static AuthService *singletonInstance;
 - (void)killAuthInfo {
     KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
     [keychain resetKeychainItem];
+    for (NSHTTPCookie *value in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:value];
+    }
+    [self.client logout];
 }
 
 @end

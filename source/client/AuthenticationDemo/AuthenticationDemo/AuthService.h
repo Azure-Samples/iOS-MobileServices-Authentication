@@ -34,8 +34,8 @@ typedef void (^CompletionWithIndexBlock) (NSUInteger index);
 - (void) testForced401:(BOOL)shouldRetry withCompletion:(CompletionWithStringBlock) completion;
 
 - (void) handleRequest:(NSURLRequest *)request
-                onNext:(MSFilterNextBlock)onNext
-            onResponse:(MSFilterResponseBlock)onResponse;
+                next:(MSFilterNextBlock)onNext
+            response:(MSFilterResponseBlock)onResponse;
 
 - (void)saveAuthInfo;
 

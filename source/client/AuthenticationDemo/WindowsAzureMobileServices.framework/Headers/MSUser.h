@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ----------------------------------------------------------------------------
 //
@@ -46,6 +46,6 @@
 
 
 // Initializes an |MSUser| instance with the given user id.
--(id) initWithUserId:(NSString *)userId;
+-(id)initWithUserId:(NSString *)userId;
 
 @end

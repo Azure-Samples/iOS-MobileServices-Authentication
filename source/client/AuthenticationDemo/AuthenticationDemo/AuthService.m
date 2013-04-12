@@ -47,8 +47,8 @@ static AuthService *singletonInstance;
     self = [super init];
     if (self) {
         // Initialize the Mobile Service client with your URL and key
-        self.client = [MSClient clientWithApplicationURLString:@"https://myauthdemo.azure-mobile.net/"
-            applicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
+        self.client = [MSClient clientWithApplicationURLString:@"https://MyMobileServiceName.azure-mobile.net/"
+            applicationKey:@"MyMobileServiceApplicationKey"];
 
         self.client = [self.client clientWithFilter:self];
 

@@ -1,10 +1,18 @@
-//
-//  AuthService.m
-//  AuthenticationDemo
-//
-//  Created by Chris Risner on 4/1/13.
-//  Copyright (c) 2013 Microsoft DPE. All rights reserved.
-//
+/*
+ Copyright 2013 Microsoft Corp
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 #import "AuthService.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
@@ -40,17 +48,15 @@ static AuthService *singletonInstance;
     if (self) {
         // Initialize the Mobile Service client with your URL and key
         self.client = [MSClient clientWithApplicationURLString:@"https://myauthdemo.azure-mobile.net/"
-                                                    applicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
+            applicationKey:@"HZatbbcDTUXflXkUFIlkcqeFxPMppl54"];
 
         self.client = [self.client clientWithFilter:self];
 
         self.keychainName = @"keychain";
         [self loadAuthInfo];
         
-        // Create an MSTable instance to allow us to work with the TodoItem table
         self.table = [_client tableWithName:@"AuthData"];
         self.accountsTable = [_client tableWithName:@"Accounts"];
-
     }
     
     return self;
@@ -59,8 +65,6 @@ static AuthService *singletonInstance;
 - (void) getAuthDataOnSuccess:(CompletionWithStringBlock) completion {
     [self.table readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
         [self logErrorIfNotNil:error];
-        //NSLog(items);
-        
         NSString *user = [NSString stringWithFormat:@"username: %@", [[items objectAtIndex:0] objectForKey:@"UserName"]];
         completion(user);
     }];
@@ -85,16 +89,12 @@ static AuthService *singletonInstance;
 - (void) loginAccount:(NSDictionary *) item
               completion:(CompletionWithStringBlock) completion {
     NSDictionary *params = @{ @"login" : @"true"};
-    
-    
     [self.accountsTable insert:item parameters:params completion:^(NSDictionary *item, NSError *error) {
         [self logErrorIfNotNil:error];
         if (error) {
             completion([error localizedDescription]);
             return;
         } else {
-            //TODO: store login info to keychain / shared prefs
-            
             MSUser *user = [[MSUser alloc] initWithUserId:[item valueForKey:@"userId"]];
             user.mobileServiceAuthenticationToken = [item valueForKey:@"token"];
             self.client.currentUser = user;
@@ -107,20 +107,14 @@ static AuthService *singletonInstance;
     
     MSTable *badAuthTable = [_client tableWithName:@"BadAuth"];
     NSDictionary *item = @{ @"data" : @"data"};
-
     self.shouldRetryAuth = shouldRetry;
-    
     [badAuthTable insert:item completion:^(NSDictionary *item, NSError *error) {
-
         [self logErrorIfNotNil:error];
-        
         completion(@"Retried auth success");
-    }];
-    
+    }];    
 }
 
-- (void) logErrorIfNotNil:(NSError *) error
-{
+- (void) logErrorIfNotNil:(NSError *) error {
     if (error) {
         NSLog(@"ERROR %@", error);
     }
@@ -130,10 +124,7 @@ static AuthService *singletonInstance;
 
 - (void) handleRequest:(NSURLRequest *)request
                 next:(MSFilterNextBlock)onNext
-            response:(MSFilterResponseBlock)onResponse
-{
-    // Increment the busy counter before sending the request
-    //[self busy:YES];
+            response:(MSFilterResponseBlock)onResponse {
     onNext(request, ^(NSHTTPURLResponse *response, NSData *data, NSError *error){
         [self filterResponse:response
                      forData:data
@@ -155,24 +146,20 @@ static AuthService *singletonInstance;
         [self killAuthInfo];
         //we're forcing custom auth to relogin from the root for now
         if (self.shouldRetryAuth && ![self.authProvider isEqualToString:@"Custom"]) {
-            // do login
-      
-            
+            // show the login dialog
             [self.client loginWithProvider:self.authProvider controller:[[[[UIApplication sharedApplication] delegate] window] rootViewController] animated:YES completion:^(MSUser *user, NSError *error) {
                 if (error && error.code == -9001) {
-                    // user cancelled authentication - return the original response
-                    //[self busy:NO];
-                    //onResponse(response, data, error);
+                    // user cancelled authentication
                     //Log them out here too
                     [self triggerLogout];
                     return;
                 }
-                //TODO: Store their login information to Keychain / prefs again
                 [self saveAuthInfo];
                 NSMutableURLRequest *newRequest = [request mutableCopy];
+                //Update the zumo auth token header in the request
                 [newRequest setValue:self.client.currentUser.mobileServiceAuthenticationToken forHTTPHeaderField:@"X-ZUMO-AUTH"];
+                //Add our bypass query string parameter so this request doesn't get a 401
                 newRequest = [self addQueryStringParamToRequest:newRequest];
-                //[newRequest setURL:[newRequest URL]]
                 onNext(newRequest, ^(NSHTTPURLResponse *innerResponse, NSData *innerData, NSError *innerError){
                     [self filterResponse:innerResponse
                                  forData:innerData
@@ -183,18 +170,15 @@ static AuthService *singletonInstance;
                 });
             }];
         } else {
-            //This fetches the current view controller and executes the
-            //logout segue 
             [self triggerLogout];
-            //What's interesting here is that even if we're currently in a modal (Deep Modal) this will fetch the top most VC from the NAV (in this demo that would be the loggedInVC) and execute it's logoutSegue.  This still works even though the modal is showing
         }
     }
     else {
-        //[self busy:NO];
         onResponse(response, data, error);
     }
 }
 
+//What's interesting here is that even if we're currently in a modal (Deep Modal) this will fetch the top most VC from the NAV (in this demo that would be the loggedInVC) and execute it's logoutSegue.  This still works even though the modal is showing
 -(void)triggerLogout {
     [self killAuthInfo];
     UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
@@ -204,7 +188,6 @@ static AuthService *singletonInstance;
 }
 
 -(NSMutableURLRequest *)addQueryStringParamToRequest:(NSMutableURLRequest *)request {
-    
     NSMutableString *absoluteURLString = [[[request URL] absoluteString] mutableCopy];
     NSString *newQuery = @"?bypass=true";
     [absoluteURLString appendString:newQuery];
@@ -214,15 +197,12 @@ static AuthService *singletonInstance;
 
 - (void)saveAuthInfo {
     KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
-
     [keychain setObject:self.client.currentUser.userId forKey:(__bridge id)kSecAttrService];
-//        [keychain setObject:self.client.currentUser.userId forKey:(__bridge id)@"userid"];
     [keychain setObject:self.client.currentUser.mobileServiceAuthenticationToken forKey:(__bridge id)kSecAttrAccount];
 }
 
 - (void)loadAuthInfo {
     KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
-    
     if ([keychain objectForKey:(__bridge id)kSecAttrService]) {
         self.client.currentUser = [[MSUser alloc] initWithUserId:[keychain objectForKey:(__bridge id)kSecAttrService]];
         self.client.currentUser.mobileServiceAuthenticationToken = [keychain objectForKey:(__bridge id)kSecAttrAccount];

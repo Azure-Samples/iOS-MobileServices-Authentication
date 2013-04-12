@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571" y="-1146"/>
+            <point key="canvasLocation" x="335" y="-1162"/>
         </scene>
         <!--Custom Login View Controller-->
         <scene sceneID="O38-kO-KAK">
@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opd-KE-fzl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="307"/>
+            <point key="canvasLocation" x="782" y="-165"/>
         </scene>
         <!--Register Account View Controller-->
         <scene sceneID="chB-E9-qvE">
@@ -416,7 +416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4B-Gd-gwj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="301"/>
+            <point key="canvasLocation" x="1294" y="-183"/>
         </scene>
         <!--Logged In View Controller-->
         <scene sceneID="8wb-RH-T6U">
@@ -572,7 +572,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zk-Ex-boG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="f7j-Dm-1TO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="-945"/>
+            <point key="canvasLocation" x="1486" y="-1149"/>
         </scene>
         <!--Deep View Controller-->
         <scene sceneID="2xL-n9-Qse">
@@ -621,7 +621,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nlm-Ba-gah" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ggp-yK-U1E" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1954" y="-1410"/>
+            <point key="canvasLocation" x="2012" y="-1434"/>
         </scene>
         <!--Deep Modal View Controller-->
         <scene sceneID="Je3-Vk-96b">
@@ -685,7 +685,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsb-5D-ITP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tze-i8-8X5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1940" y="-558"/>
+            <point key="canvasLocation" x="2012" y="-570"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PmH-iW-aNQ">
@@ -703,7 +703,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tn6-Tl-4EX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-474"/>
+            <point key="canvasLocation" x="-103" y="-1162"/>
         </scene>
     </scenes>
     <resources>
@@ -712,6 +712,65 @@
         <image name="microsoft-login-button@2x.png" width="302" height="86"/>
         <image name="twitter_blue_sign_in@2x.png" width="198" height="44"/>
     </resources>
+    <classes>
+        <class className="CustomLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="tappedCancel:"/>
+                <relationship kind="action" name="tappedForgotUsernamePassword:"/>
+                <relationship kind="action" name="tappedLogin:"/>
+                <relationship kind="action" name="tappedRegister:"/>
+                <relationship kind="outlet" name="lblInfo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtPassword" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtUsername" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DeepModalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DeepModalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="tapped401:"/>
+            </relationships>
+        </class>
+        <class className="DeepViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DeepViewController.h"/>
+        </class>
+        <class className="LoggedInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoggedInViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="tapped401NoRetry:"/>
+                <relationship kind="action" name="tapped401Retry:"/>
+                <relationship kind="outlet" name="lblInfo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblUserId" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="RegisterAccountViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegisterAccountViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="tappedRegister:"/>
+                <relationship kind="outlet" name="lblInfo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtConfirm" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtEmail" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtPassword" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtUsername" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logout:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="tappedFacebook:"/>
+                <relationship kind="action" name="tappedGoogle:"/>
+                <relationship kind="action" name="tappedMicrosoft:"/>
+                <relationship kind="action" name="tappedTwitter:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

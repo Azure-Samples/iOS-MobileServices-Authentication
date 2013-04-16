@@ -81,6 +81,7 @@ static AuthService *singletonInstance;
             MSUser *user = [[MSUser alloc] initWithUserId:[item valueForKey:@"userId"]];
             user.mobileServiceAuthenticationToken = [item valueForKey:@"token"];
             self.client.currentUser = user;
+            [self saveAuthInfo];
             completion(@"SUCCESS");
         }
     }];
@@ -103,6 +104,7 @@ static AuthService *singletonInstance;
         }
     }];
 }
+
 - (void) testForced401:(BOOL)shouldRetry withCompletion:(CompletionWithStringBlock) completion {
     
     MSTable *badAuthTable = [_client tableWithName:@"BadAuth"];
@@ -196,22 +198,23 @@ static AuthService *singletonInstance;
 }
 
 - (void)saveAuthInfo {
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
-    [keychain setObject:self.client.currentUser.userId forKey:(__bridge id)kSecAttrService];
-    [keychain setObject:self.client.currentUser.mobileServiceAuthenticationToken forKey:(__bridge id)kSecAttrAccount];
+    [KeychainItemWrapper createKeychainValue:self.client.currentUser.userId forIdentifier:@"userid"];
+    [KeychainItemWrapper createKeychainValue:self.client.currentUser.mobileServiceAuthenticationToken forIdentifier:@"token"];
 }
 
 - (void)loadAuthInfo {
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
-    if ([keychain objectForKey:(__bridge id)kSecAttrService]) {
-        self.client.currentUser = [[MSUser alloc] initWithUserId:[keychain objectForKey:(__bridge id)kSecAttrService]];
-        self.client.currentUser.mobileServiceAuthenticationToken = [keychain objectForKey:(__bridge id)kSecAttrAccount];
+    NSString *userid = [KeychainItemWrapper keychainStringFromMatchingIdentifier:@"userid"];
+    if (userid) {
+        NSLog(@"userid: %@", userid);
+        self.client.currentUser = [[MSUser alloc] initWithUserId:userid];
+        self.client.currentUser.mobileServiceAuthenticationToken = [KeychainItemWrapper keychainStringFromMatchingIdentifier:@"token"];
     }
 }
 
 - (void)killAuthInfo {
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainName accessGroup:nil];
-    [keychain resetKeychainItem];
+    [KeychainItemWrapper deleteItemFromKeychainWithIdentifier:@"userid"];
+    [KeychainItemWrapper deleteItemFromKeychainWithIdentifier:@"token"];
+    
     for (NSHTTPCookie *value in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:value];
     }

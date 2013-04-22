@@ -13,7 +13,7 @@ Below you will find requirements and deployment instructions.
 * /source/scripts - This contains copies of the server side scripts and requires script changes noted below.
 
 ## Additional Resources
-I've released two blog posts which walks through the code for this sample.  The [first deals with the server side scripts](http://chrisrisner.com/Authentication-with-Mobile-Services) and talks about how to set up the different auth providers.  The [second talks about the iOS Client](http://chrisrisner.com/Authentication-with-iOS-and-Windows-Azure-Mobile-Services) and how to connect that to the Mobile Service.
+I've released two blog posts which walks through the code for this sample.  The [first deals with the server side scripts](http://chrisrisner.com/Authentication-with-Windows-Azure-Mobile-Services) and talks about how to set up the different auth providers.  The [second talks about the iOS Client](http://chrisrisner.com/Authentication-with-iOS-and-Windows-Azure-Mobile-Services) and how to connect that to the Mobile Service.
 
 #Setting up your Mobile Service
 After creating your Mobile Service in the Windows Azure Portal, you'll need to create tables named "Accounts", "AuthData", and "BadAuth".  After creating these tables, copy the appropriate scripts over.

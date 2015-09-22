@@ -1,3 +1,9 @@
+---
+services:
+platforms:
+author: azure
+---
+
 # iOS - Mobile Services - Authentication
 This is an authentication sample which makes use of Windows Azure Mobile Services.  Mobile Services offers built in authentication with Facebook, Google, Microsoft, and Twitter as well as the possibility to implement your own custom authentication.  This sample was built using XCode, the iOS Framework, and the iOS Mobile Services SDK.
 
